@@ -15,6 +15,99 @@ db.createCollection("teachers", {
   },
 });
 
+db.teachers.insertMany([
+  {
+    name: "Laura",
+    age: 45,
+    specialty: "Física",
+    department: "Ciencias",
+    yearsOfExperience: 20,
+    email: "laura.phys@mail.com",
+    salary: 3800.0,
+    active: true,
+  },
+  {
+    name: "Carlos",
+    age: 38,
+    specialty: "Filosofía",
+    yearsOfExperience: 12,
+    email: "carlos.phil@mail.com",
+    salary: 3600.0,
+    active: true,
+  },
+  {
+    name: "María",
+    age: 50,
+    specialty: "Química",
+    yearsOfExperience: 25,
+    salary: 4200.0,
+    active: true,
+  },
+  {
+    name: "Jorge",
+    age: 33,
+    specialty: "Literatura",
+    yearsOfExperience: 8,
+    email: "jorge.lit@mail.com",
+    salary: 3100.0,
+  },
+  {
+    name: "Ana",
+    age: 29,
+    specialty: "Biología",
+    department: "Ciencias",
+    yearsOfExperience: 5,
+    email: "ana.bio@mail.com",
+    active: true,
+  },
+  {
+    name: "Miguel",
+    age: 41,
+    specialty: "Economía",
+    department: "Ciencias Sociales",
+    yearsOfExperience: 18,
+    salary: 4000.0,
+    active: true,
+  },
+  {
+    name: "Sofía",
+    age: 36,
+    specialty: "Psicología",
+    yearsOfExperience: 14,
+    email: "sofia.psych@mail.com",
+    salary: 3700.0,
+  },
+  {
+    name: "Fernando",
+    age: 55,
+    specialty: "Matemáticas",
+    department: "Ciencias",
+    yearsOfExperience: 30,
+    email: "fernando.math@mail.com",
+    salary: 4500.0,
+    active: false,
+  },
+  {
+    name: "Valentina",
+    age: 28,
+    specialty: "Historia",
+    department: "Humanidades",
+    yearsOfExperience: 4,
+    email: "valentina.hist@mail.com",
+    salary: 2800.0,
+    active: true,
+  },
+  {
+    name: "Ricardo",
+    age: 47,
+    specialty: "Filosofía",
+    department: "Humanidades",
+    yearsOfExperience: 22,
+    email: "ricardo.phil@mail.com",
+    active: true,
+  },
+]);
+
 db.createCollection("courses", {
   validator: {
     $jsonSchema: {
@@ -73,65 +166,84 @@ db.createCollection("courses", {
   },
 });
 
-db.teachers.insertMany([
-  {
-    name: "Juana",
-    age: 40,
-    specialty: "Mathematics",
-    department: "Sciences",
-    yearsOfExperience: 15,
-    email: "JeaneDArc@gmail.com",
-    salary: 3200.0,
-    active: true,
-  },
-  {
-    name: "Pedro",
-    age: 35,
-    specialty: "History",
-    yearsOfExperience: 10,
-    salary: 3400.0,
-    department: "Humanities",
-    active: false,
-  },
-  {
-    name: "Profesor Pancake de los Siete Sabores",
-    age: 50,
-    specialty: "Culinary Arts",
-    yearsOfExperience: 25,
-    salary: 4300.0,
-    active: false,
-    department: "Gastronomy",
-  },
-]);
-
-const juana = db.teachers.findOne({ name: "Juana" });
+const pedro = db.teachers.findOne({ name: "Pedro" });
+const maria = db.teachers.findOne({ name: "María" });
+const miguel = db.teachers.findOne({ name: "Miguel" });
 
 db.courses.insertMany([
   {
-    code: "MAT101",
-    name: "Matematicas Basicas",
+    code: "HIS301",
+    name: "Historia Avanzada",
     credits: 4,
-    teacherId: juana._id,
+    teacherId: pedro._id,
     schedule: {
-      days: ["L", "M", "X"],
-      timeSlots: [
-        { start: "08:00", end: "10:00" },
-        { start: "11:00", end: "13:00" },
-      ],
+      days: ["L", "M", "J"],
+      timeSlots: [{ start: "09:00", end: "11:00" }],
     },
     maxCapacity: 30,
     enrolled: [],
   },
   {
-    code: "HIS201",
-    name: "Historia Universal",
+    code: "HIS302",
+    name: "Historia Contemporánea",
     credits: 3,
-    teacherId: juana._id,
+    teacherId: pedro._id,
     schedule: {
-      days: ["J", "V"],
-      timeSlots: [{ start: "09:00", end: "11:00" }],
+      days: ["X", "V"],
+      timeSlots: [{ start: "11:00", end: "13:00" }],
     },
     maxCapacity: 25,
+    enrolled: [],
+  },
+  {
+    code: "CHE101",
+    name: "Química General",
+    credits: 5,
+    teacherId: maria._id,
+    schedule: {
+      days: ["M", "X", "V"],
+      timeSlots: [
+        { start: "10:00", end: "12:00" },
+        { start: "13:00", end: "14:00" },
+      ],
+    },
+    maxCapacity: 35,
+    enrolled: [],
+  },
+  {
+    code: "CHE102",
+    name: "Química Orgánica",
+    credits: 4,
+    teacherId: maria._id,
+    schedule: {
+      days: ["L", "J"],
+      timeSlots: [{ start: "09:00", end: "11:00" }],
+    },
+    maxCapacity: 30,
+    enrolled: [],
+  },
+  {
+    code: "ECO101",
+    name: "Introducción a la Economía",
+    credits: 3,
+    teacherId: miguel._id,
+    schedule: {
+      days: ["J", "V"],
+      timeSlots: [{ start: "08:00", end: "10:00" }],
+    },
+    maxCapacity: 40,
+    enrolled: [],
+  },
+  {
+    code: "ECO102",
+    name: "Macroeconomía",
+    credits: 4,
+    teacherId: miguel._id,
+    schedule: {
+      days: ["L", "M"],
+      timeSlots: [{ start: "14:00", end: "16:00" }],
+    },
+    maxCapacity: 35,
     enrolled: [],
   },
 ]);
@@ -140,17 +252,19 @@ const experiencedTeachers = db.teachers
   .find({ yearsOfExperience: { $gt: 15 } })
   .toArray();
 
-const average = db.teachers
+const statsActiveTeachers = db.teachers
   .aggregate([
     { $match: { active: true } },
     {
       $group: {
         _id: null,
-        avgAge: { $avg: "$age" },
+        age: { $avg: "$age" },
+        yearsOfExperience: { $avg: "$yearsOfExperience" },
+        salary: { $avg: "$salary" },
       },
     },
   ])
-  .toArray()[0].avgAge;
+  .toArray()[0];
 
 const statsByDepartment = db.teachers
   .aggregate([
@@ -175,14 +289,22 @@ function enrollStudent(courseCode, studentId) {
         enrolled: {
           studentId: studentId,
           enrollmentDate: new Date(),
-          status: "active",
+          status: "activo",
         },
       },
     }
   );
 }
 
-enrollStudent("MAT101", new ObjectId());
+function enrollRandomStudentsUsingEnroll(courseCode, numberOfStudents) {
+  for (let i = 0; i < numberOfStudents; i++) {
+    const randomStudentId = new ObjectId();
+    enrollStudent(courseCode, randomStudentId);
+  }
+}
+
+enrollRandomStudentsUsingEnroll("MAT101", 5);
+enrollRandomStudentsUsingEnroll("ECO102", 3);
 
 const coursesWithAvailableSeats = db.courses
   .aggregate([
@@ -213,7 +335,8 @@ print("Profesores con más de 15 años de experiencia:");
 printjson(experiencedTeachers);
 print("----------------------------");
 
-print("Edad promedio de profesores activos: " + average + " años");
+print("Estadísticas de los profesores activos:");
+printjson(statsActiveTeachers);
 print("----------------------------");
 
 print("Estadísticas por departamento:");
